@@ -1,0 +1,24 @@
+##############Identify keyword set that represents the domain that you are trying to extract for##################
+@pseudocode
+func Set_Keywords()
+    list keywords['abc', 'bbc', 'cbc']
+    
+    
+    
+    
+##################Method for extracting basic relevant paragraphs : Identification Model#########################
+#Using the keywords set, extract the relevant paragraphs
+@pseudocode
+func Identify_Insights(document A)
+    pages=get_pages(A)
+    For each page in pages
+        paras=A.get_paragraphs(page) 
+        For each para in paras
+            For each keyword in the keywords
+                If keyword is present in the para
+                    #tag the paragraph with the keyword & frequency of the keyword as well
+                    #mark the paragraph as "selected"
+    
+    #Calculate the keyword signature weight
+    For all the "selected" paragraphs
+        signature_weight=Summation of(frequency of keyword x id of keyword)/sum( frequencies of all keywords)
