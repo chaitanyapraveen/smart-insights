@@ -1,0 +1,40 @@
+##################Method for refining the "selected" paragraphs : Refining Model##################################
+#Using the "selected" paragraphs, we are going to run through several filters to remove semantically similar paragraphs
+@pseudocode
+func Refine_Insights(document A)
+    select_para = A.get_selected_paragraphs()
+    #Remove duplication of paragraphs which have similar keyword signature weight
+    for i in each select_para
+        for j in each select_para
+            if i is not equal to j
+                if abs(signature_weight of i - signature_weight of j) < tolerance
+                    #There is a good possibility that these two are close semantically
+                    result=compare_difference_keyword_histograms(para_i, para_j)
+                    if result is close to zero
+                        #This means they are semantically close as well
+                        Delete Smaller(select_para[i], select_para[j])
+                        
+    #Now we have first order refined version of paragraphs. 
+    #Time for applying text similarity metrics such as cosine similarity etc
+    for i in each select_para
+        for j in each select_para
+            if i is not equal to j
+                #get_cosine_similarity_matrix function compares each sentence of select_para[i] against select_para[j] returns a matrix
+                matrix M = get_cosine_similarity_matrix(select_para[i], select_para[j])
+                if matrix M has high values
+                    #If the matrix contains a sub matrix with high values, 
+                    #then it can be assumed that select_para[i] and select_para[j] are similar.
+                    #Therefore, the smaller of them can be eliminated
+                    Delete Smaller(select_para[i], select_para[j])
+                    
+func get_cosine_similarity_matrix(para A, para B)
+  Matrix M
+  for each sent_a in para A
+    for each sent_b in para B
+      sent_a_vec=convert_vector(sent_a,"tf/tf-idf")
+      sent_b_vec=convert_vector(sent_b,"tf/tf-idf")
+      val=cosine_similarity(sent_a,vec,sent_b_vec)
+      M[a,b]=val
+  return M
+      
+      
