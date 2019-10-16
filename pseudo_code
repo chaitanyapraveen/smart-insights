@@ -1,0 +1,76 @@
+#########################################Basic class for document handling###########################################
+#Create a factory design pattern to handle various types of documents(.txt, .csv, .pdf)
+#Create specific utility functions called extract_text, extract_paragraphs, extract_sentences etc
+@pseudocode
+class document{
+
+    public:
+        virtual void document()
+        virtual void extract_pages()
+        virtual void extract_paragraphs()
+        virtual void extract_sentences()
+
+}
+
+#You can then have several implementations of the document base class based on the document type such as pdf, word etc
+#Below is the implementation for pdf class
+@pseudocode
+class pdf_document: public document{
+    public:
+        func pdf_document()
+        func extract_pages(){
+         ...implementation of extraction
+        }
+        func extract_paragraphs(){
+         ...implementation of extraction
+        }
+        func extract_sentences(){
+         ...implementation of extraction
+        }
+        
+    private:
+        var list_of_paragraphs(tree?)
+
+}
+
+
+##############Identify keyword set that represents the domain that you are trying to extract for##################
+@pseudocode
+func Set_Keywords()
+    list keywords['abc', 'bbc', 'cbc']
+    
+    
+    
+    
+##################Method for extracting basic relevant paragraphs : Identification Model#########################
+#Using the keywords set, extract the relevant paragraphs
+@pseudocode
+func Identify_Insights(document)
+    Get pages from documents
+    For each page
+        Get all the paragraphs
+        For each paragraph
+            For each keyword in the list
+                If keyword is present in the paragraph
+                    tag the paragraph with the keyword & frequency of the keyword as well
+                    mark the paragraph as "selected"
+    
+    #Calculate the keyword signature weight
+    For all the "selected" paragraphs
+        signature_weight=Summation of(frequency of keyword x id of keyword)/sum( frequencies of all keywords)
+        
+        
+
+##################Method for refining the "selected" paragraphs : Refining Model##################################
+#Using the "selected" paragraphs, we are going to run through several filters to remove semantically similar paragraphs
+@pseudocode
+func Refine_Insights(document)
+    
+
+                    
+    
+         
+    
+
+
+
